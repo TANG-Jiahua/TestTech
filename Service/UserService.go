@@ -39,7 +39,7 @@ func AddUser(c *gin.Context) {
 			c.String(http.StatusOK,"\nSuccessfully add: "+u.Id)
 			fmt.Println(u)
 		}else {
-			c.String(http.StatusOK,"\nError message : Model exists!")
+			c.String(http.StatusOK,"\nError message : User exists!")
 		}
 
 		f,err:=os.Create("DataFichier/"+u.Id+".txt")
@@ -64,7 +64,7 @@ func Login(c *gin.Context){
 	var exist,result = UserExist(json["id"].(string))
 
 	if json["id"] == nil{
-		c.String(http.StatusOK, "Error message : no id!")
+		c.String(http.StatusOK, "Error message : User id not found!")
 	}else {
 		if exist {
 			pswd := json["password"].(string)
@@ -74,7 +74,7 @@ func Login(c *gin.Context){
 				c.String(http.StatusOK, "Error message : password error!")
 			}
 		} else {
-			c.String(http.StatusOK, "Error message : Model Id not found!")
+			c.String(http.StatusOK, "Error message : User Id not found!")
 		}
 	}
 
@@ -97,7 +97,7 @@ func DeleteUser(c *gin.Context){
 		c.String(http.StatusOK,"Delete successfully!")
 
 	}else{
-		c.String(http.StatusOK,"Error message : Model id not found!")
+		c.String(http.StatusOK,"Error message : User id not found!")
 	}
 }
 
@@ -138,7 +138,7 @@ func GetUserById(c *gin.Context){
 		}
 		c.String(http.StatusOK,string(jsonBytes))
 	}else {
-		c.String(http.StatusOK,"Error message: Model id not found!")
+		c.String(http.StatusOK,"Error message: User id not found!")
 	}
 }
 
