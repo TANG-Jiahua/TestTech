@@ -157,9 +157,7 @@ func UpdateUser (c *gin.Context){
 	if err != nil {
 		fmt.Printf("%s",err)
 		if err==mongo.ErrNoDocuments{
-			c.JSON(200,gin.H{
-				"message":"user not found!",
-			})
+			c.String(http.StatusOK,"Error message : User id not found!")
 		}
 	}else{
 		copyTo(inputUser, result)
@@ -169,6 +167,7 @@ func UpdateUser (c *gin.Context){
 			log.Fatal(err)
 		}
 		log.Println("collection.updateOne:",updateResult)
+		c.String(http.StatusOK,"Update successfully!")
 	}
 
 
